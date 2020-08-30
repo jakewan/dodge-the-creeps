@@ -12,6 +12,7 @@ func game_over():
 	$HUD.show_game_over()
 	get_tree().call_group("mobs", "queue_free")
 	$Music.stop()
+	$DeathSound.play()
 	
 func new_game():
 	score = 0
