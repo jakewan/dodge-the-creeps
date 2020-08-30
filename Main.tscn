@@ -37,7 +37,7 @@ __meta__ = {
 }
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-rotation = 0.785398
+position = Vector2( -2.38236, 0 )
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 [connection signal="hit" from="Player" to="." method="game_over"]
