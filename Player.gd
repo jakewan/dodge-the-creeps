@@ -1,7 +1,11 @@
 extends Area2D
 
+### Signals
 
-# Member variables
+# Emitted when player collides with an enemy
+signal hit
+
+### Member variables
 
 # How fast the player will move
 export var speed = 400
@@ -48,3 +52,21 @@ func _process(delta):
 	elif velocity.y != 0:
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_v = velocity.y > 0
+
+
+func _on_Player_body_entered(body):
+	# Hide body when hit
+	hide()
+	
+	emit_signal("hit")
+	
+	# Disabling player's collision to avoid emitting duplicate signals
+	# set_deferred is used to defer changing the setting until it is safe to
+	# do so
+	$CollisionShape2D.set_deferred("disabled", true)
+
+# Function to reset player when starting a new game
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
